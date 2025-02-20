@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart & Move</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Custom colors can be defined if not already in your Tailwind config */
+        .bg-primary { background-color:#1C4670; } /* Example dark blue/gray */
+        .bg-secondary { background-color:#FFA229 ; } /* Example gray */
+        .text-secondary{color: #FFA229;}
+        .text-primary{color: #1C4670;}
+        .hide-scrollbar::-webkit-scrollbar{
+         display: none;
+        }
+      </style>
+</head>
+<body>
+    <div
+  class="bg-cover bg-center text-white"
+  style="background-image: url('./Asset/bus-bg.png');">
+    <header class="flex justify-between items-center p-4 bg-black bg-opacity-30 relative">
+        <div class="flex items-center gap-10">
+            <div class="text-2xl font-bold">Smart & Move</div>
+            <nav class="hidden lg:flex">
+                <ul class="flex gap-6 text-lg">
+                    <li class="cursor-pointer">Nearest Bus Stop</li>
+                    <li class="cursor-pointer">Real Time Tracking</li>
+                    <li class="cursor-pointer">Blog</li>
+                    <li class="cursor-pointer">Feedback</li>
+                    <li class="cursor-pointer">Contact Us</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="lg:hidden">
+            <button id="menu-toggle" class="text-white text-2xl">☰</button>
+        </div>
+        <div class="hidden lg:flex gap-3">
+            <button class="border border-white px-4 py-2 text-white rounded-md">Log In</button>
+            <button class="bg-white text-black px-4 py-2 rounded-md">Sign Up</button>
+        </div>
+    </header>
+    <nav id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-xl">
+        <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+        <a href="#" class="text-white">Nearest Bus Stop</a>
+        <a href="#" class="text-white">Real Time Tracking</a>
+        <a href="#" class="text-white">Blog</a>
+        <a href="#" class="text-white">Feedback</a>
+        <a href="#" class="text-white">Contact Us</a>
+        <button class="border border-white px-4 py-2 text-white rounded-md">Log In</button>
+        <button class="bg-white text-black px-4 py-2 rounded-md">Sign Up</button>
+    </nav>
+    <section class="text-center py-20 px-5 mt-[100px]">
+        <div class="bg-black bg-opacity-40 p-4 px-0 rounded-lg mb-6">
+            <h1 class="text-5xl font-bold mb-10">Navigate Roads with Comfort</h1>
+            <h2 class="text-2xl font-bold mb-4">Fill out the form below to book your tickets and begin your journey.</h2>
+        </div>
+        <div class="bg-black bg-opacity-40 p-6 rounded-lg flex flex-col items-center max-w-4xl mx-auto gap-4 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 w-full">
+                <div class="w-full">
+                    <label class="block mb-1">From</label>
+                    <select id="from" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full"></select>
+                </div>
+                <div class="w-full">
+                    <label class="block mb-1">To</label>
+                    <select id="to" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full"></select>
+                </div>
+                <div class="w-full">
+                    <label class="block mb-1">Passengers</label>
+                    <input type="number" placeholder="1" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full">
+                </div>
+                <div class="w-full">
+                    <label class="block mb-1">Departure</label>
+                    <input type="date" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full">
+                </div>
+                <div class="flex items-end w-full">
+                    <button class="bg-black text-white font-bold px-6 py-3 rounded-md w-full">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    </div>
+    <div class="flex flex-col items-center text-center pt-14 px-4">
+        <div class=" text-sm uppercase tracking-widest text-secondary">
+            Welcome to Smart And Move
+        </div>
+        <div class="font-bold text-4xl py-2 pb-8 text-gray-800">Explore Our Services</div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M3 6V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v1h1v2h-1v10h1v2h-2v-1H4v1H2v-2h1V8H2V6h1zm2-1v1h14V5H5zm15 3H4v10h16V8zm-2 4v2h-3v-2h3zm-5 0v2H8v-2h5zm-7 0v2H5v-2h3z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">Modern Fleet</h3>
+                <p class="text-gray-600 mt-2">Our buses are equipped with the latest technology and comforts.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8v5l4.3 2.6.7-1.2-3.5-2.1V8z"/><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-2 0c0-4.4-3.6-8-8-8S4 7.6 4 12s3.6 8 8 8 8-3.6 8-8z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">On-Time Service</h3>
+                <p class="text-gray-600 mt-2">We guarantee timely departures and arrivals, ensuring convenience.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M10 2h4v4h-4V2zm5 6h-6v6H5l7 7 7-7h-4V8z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">Speed & Efficiency</h3>
+                <p class="text-gray-600 mt-2">We prioritize delivering you to your destination on time and without delays.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M5 13h14l-7-9-7 9zm7 2.5c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">Real-Time Tracking</h3>
+                <p class="text-gray-600 mt-2">Monitor progress instantly with our real-time tracking solutions.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-2h2v2zm6 0h-2v-2h2v2zm1-4H6v-2h12v2zm0-4H6V9h12v2z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">Nearest Bus Station</h3>
+                <p class="text-gray-600 mt-2">Find the closest bus stations effortlessly and plan your journey.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+            <div class="flex flex-col items-center p-6 bg-white shadow-md rounded-xl border border-gray-200 hover:shadow-lg transition">
+                <svg class="w-16 h-16 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4V6zm0 4h16v2H4v-2zm0 4h16v2H4v-2zm0 4h16v2H4v-2z"/></svg>
+                <h3 class="font-bold text-lg mt-4 text-gray-800">Route of the Bus</h3>
+                <p class="text-gray-600 mt-2">Navigate bus routes efficiently with real-time updates and accurate path tracking.</p>
+                <a href="#" class="text-primary font-medium mt-3 hover:underline">Learn more</a>
+            </div>
+        </div>
+
+        <a href="#" class="bg-blue-600 text-white px-6 py-3 mt-8 mb-12 rounded-lg shadow-md hover:bg-blue-700 transition font-medium">
+            See All Services
+        </a>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between w-full p-4 pt-16 pb-8 bg-gray-100">
+        <div class="text-left md:w-1/2">
+            <div class="text-secondary text-xs uppercase tracking-widest pb-4">
+                Welcome to Smart And Move
+            </div>
+            <h2 class="text-black text-4xl font-bold flex pb-4">
+                About <div class="text-secondary pl-1"> Smart And Move</div>
+            </h2>
+            <p class="text-black mt-2 mb-8">
+                We have been working on revolutionizing public transportation with our innovative high-tech bus service over the last couple of years, and I’m extremely proud of the progress we’ve made in addressing inefficiencies and corruption in this sector.<br>
+                Our solution is built on transparency, reliability, and adaptability to cater to the ever-changing needs of daily commuters and environmentally conscious riders. By integrating advanced technology like QR-based ticketing and AI-powered fare management systems, we have consistently exceeded expectations and delivered tangible improvements in public transport efficiency.<br><br>
+                I would strongly recommend our services to any organization or authority looking to enhance their public transportation system with reliable, secure, and cutting-edge solutions.
+            </p>
+            <button class="flex items-center bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-gray-600 transition duration-300">
+                <span>Learn More</span>
+                <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+            </button>
+        </div>
+        <div class="flex-shrink-0 ml-4 md:w-1/2">
+            <img src="https://gst-contracts.s3.ap-southeast-1.amazonaws.com/uploads/bcc/cms/asset/avatar/324800/banner6.jpg" alt="Example" class="w-full h-auto max-w-3xl object-cover rounded border border-amber-600">
+        </div>
+    </div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between w-full p-4 pt-16 pb-8 bg-white">
+    <div class="text-left md:w-1/2">
+        <div class="text-yellow-500 text-xs uppercase tracking-widest pb-4">
+            Why Choose Smart And Move
+        </div>
+        <h2 class="text-4xl font-bold flex pb-4">
+            Why Smart And<div class="text-yellow-500 pl-1"> Move</div>
+        </h2>
+        <p class="mt-2 mb-8">
+            Smart And Move offers reliable, efficient, and real-time bus services, ensuring a seamless travel experience. With consistent punctuality, eco-friendly routes, and user-friendly features, we help you reach your destination on time while building trust and convenience with every ride.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:w-1/2 mt-8 md:mt-0">
+        <div class="bg-[#FEF3EF] p-5 border-solid border-2 rounded-md cursor-pointer hover:shadow-2xl transition flex flex-col items-center text-center">
+            <div class="mb-8 text-4xl text-[#E5B4A3]">&#9749;</div>
+            <div class="text-lg font-bold max-w-[260px]">Comfort and Convenience</div>
+            <div class="text-base p-3">
+                Travel with ease and comfort in well-maintained, modern buses designed for your convenience.
+            </div>
+        </div>
+
+        <div class="bg-[#f1fbf3] p-5 border-solid border-2 rounded-md cursor-pointer hover:shadow-2xl transition flex flex-col items-center text-center">
+            <div class="mb-8 text-4xl text-[#C1E3C5]">&#128274;</div>
+            <div class="text-lg font-bold max-w-[260px]">Transparent Pricing</div>
+            <div class="text-base p-3">
+                No hidden fees! What you see is what you get—clear and upfront pricing for every trip.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
+    <div class="bg-[#EDF3FF] p-5 border-solid border-2 rounded-md cursor-pointer hover:shadow-2xl transition flex flex-col items-center text-center">
+        <div class="mb-8 text-4xl text-[#C2D3E5]">&#9742;</div>
+        <div class="text-lg font-bold max-w-[260px]">24/7 Customer Support</div>
+        <div class="text-base p-3">
+            Always available! Our customer support team is ready to assist you anytime, day or night.
+        </div>
+    </div>
+
+    <div class="bg-[#fbf1fb] p-5 border-solid border-2 rounded-md cursor-pointer hover:shadow-2xl transition flex flex-col items-center text-center">
+        <div class="mb-8 text-4xl text-[#D8B5C3]">&#127810;</div>
+        <div class="text-lg font-bold max-w-[260px]">Safe and Secure</div>
+        <div class="text-base p-3">
+            We prioritize your privacy. Ride with confidence knowing your information is securely handled.
+        </div>
+    </div>
+
+    <div class="bg-[#f1fbf3] p-5 border-solid border-2 rounded-md cursor-pointer hover:shadow-2xl transition flex flex-col items-center text-center">
+        <div class="mb-8 text-4xl text-[#C1E3C5]">&#127807;</div>
+        <div class="text-lg font-bold max-w-[260px]">Eco-Friendly</div>
+        <div class="text-base p-3">
+            We're committed to a greener future with eco-conscious routes and reduced carbon emissions.
+        </div>
+    </div>
+</div>
+<div class="bg-primary text-white flex flex-col md:flex-row items-center justify-between w-full p-4 pt-16 pb-8">
+    <div class="text-left w-full md:w-1/2 px-4 md:px-11">
+        <h2 class="text-4xl font-bold pb-4">Seamless Bus Booking Experience</h2>
+        <p class="mt-2 mb-8">
+            Say goodbye to long queues and unreliable ticketing systems. Our platform ensures a smooth,
+            transparent, and efficient way to book government bus tickets online.
+        </p>
+        <ul>
+            <li>
+                <div class="flex flex-row mb-8">
+                    <div class="rounded-full bg-[#ffa229] p-2 mr-4">
+                        <svg class="w-12 h-12" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 21h6v2H9zM10.84 3.14L10 1h4l-.84 2.14a7.986 7.986 0 013.14 1.47L18.8 2.8l2.83 2.83-1.81 1.81a7.986 7.986 0 011.47 3.14L23 11v4l-2.14-.84a7.986 7.986 0 01-1.47 3.14l1.81 1.81-2.83 2.83-1.81-1.81a7.986 7.986 0 01-3.14 1.47L14 23h-4l.84-2.14a7.986 7.986 0 01-3.14-1.47L5.2 21.2l-2.83-2.83 1.81-1.81a7.986 7.986 0 01-1.47-3.14L1 14v-4l2.14.84a7.986 7.986 0 011.47-3.14L2.8 5.2 5.63 2.37l1.81 1.81a7.986 7.986 0 013.14-1.47z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">Smart & Hassle-Free Booking</h2>
+                        <p class="mt-2">
+                            Easily search, select, and book government bus tickets from the comfort of your home.
+                            Our user-friendly interface makes booking seamless and stress-free.
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="flex flex-row mb-8">
+                    <div class="rounded-full bg-[#ffa229] p-2 mr-4">
+                        <svg class="w-12 h-12" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v2H3V3zm2 4h14v10H5V7zm-2 12h18v2H3v-2z"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold">Real-Time Ticket Validation</h2>
+                        <p class="mt-2">
+                            Every booking generates a unique QR code, ensuring transparency and preventing corruption.
+                            Scan your QR code at bus gates for seamless entry.
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="relative w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0 px-4">
+        <!-- Thumbnail Image Wrapped in a Link -->
+<a href="https://www.youtube.com/watch?v=8P1-JLmtY4Q" target="_blank">
+    <div class="relative w-full max-w-xl mx-auto cursor-pointer">
+
+      <img src="https://img.youtube.com/vi/8P1-JLmtY4Q/maxresdefault.jpg"
+           alt="YouTube Thumbnail"
+           class="w-full h-auto rounded-2xl ">
+    
+      <!-- Play Button Overlay -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <svg class="w-16 h-16 text-red-600 bg-white rounded-full p-3 opacity-80" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
+  </a>
+  
+                
+    </div>
+</div>
+<div class="flex flex-col sm:flex-row items-center w-full p-8 bg-secondary justify-center sm:justify-around gap-6">
+    <div class="flex items-center text-center sm:text-left sm:flex-row flex-col">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mb-3 sm:mb-0 sm:mr-3 bg-red-500">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17l-4.88-4.88L2 13l7 7 13-13-2.12-2.12z"/></svg>
+        </div>
+        <h2 class="text-lg font-semibold sm:pl-3">Book Your Ticket Online</h2>
+    </div>
+    <div class="flex items-center text-center sm:text-left sm:flex-row flex-col">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mb-3 sm:mb-0 sm:mr-3 bg-green-600">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7.14V5a2 2 0 00-2-2H5a2 2 0 00-2 2v2.14A3 3 0 003 10v7a2 2 0 002 2h14a2 2 0 002-2v-7a3 3 0 00-1-2.86zM5 5h14v2H5V5zm14 12H5v-7h14v7z"/></svg>
+        </div>
+        <h2 class="text-lg font-semibold sm:pl-3">Make Secure Payment</h2>
+    </div>
+    <div class="flex items-center text-center sm:text-left sm:flex-row flex-col">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mb-3 sm:mb-0 sm:mr-3 bg-orange-500">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 7V5a2 2 0 00-2-2H5a2 2 0 00-2 2v2H1v12a2 2 0 002 2h18a2 2 0 002-2V7h-2zM5 5h14v2H5V5zm14 14H5v-8h14v8z"/></svg>
+        </div>
+        <h2 class="text-lg font-semibold sm:pl-3">Get QR Code for Entry</h2>
+    </div>
+    <div class="flex items-center text-center sm:text-left sm:flex-row flex-col">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mb-3 sm:mb-0 sm:mr-3 bg-gray-500">
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v2H4V4zm2 4h12v10H6V8zm-2 12h16v2H4v-2z"/></svg>
+        </div>
+        <h2 class="text-lg font-semibold sm:pl-3">Receive Confirmation Mail</h2>
+    </div>
+</div>
+
+<div class="bg-white items-center text-left mb-8">
+    <div class="text-yellow-500 text-sm pt-8 uppercase tracking-widest text-center">
+      Explore Our Blogs
+    </div>
+    <div class="font-bold text-4xl py-2 pb-10 text-center">
+      Transforming Public Transport
+    </div>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Blog Post 1 -->
+      <div class="bg-white p-5 pb-10 w-full max-w-[352px] mx-auto cursor-pointer">
+        <img class="mb-8" src="./Asset/bus-digital-ticketing.webp" alt="" />
+        <div class="flex items-center text-gray-600 gap-1">
+          <div class="text-[20px] rounded-full">Arjav Jain</div>
+          <div class="text-base decoration-solid">
+            <ul>
+              <li>15 Jan 2025</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="text-lg font-semibold max-w-[260px]">
+          Revolutionizing Bus Ticketing
+        </div>
+        <div class="text-lg text-gray-600 mb-4">
+          How digital ticketing and QR codes are transforming public transportation in India.
+        </div>
+        <div class="mb-4 flex gap-x-2 text-sm">
+          <div class="text-green-600 bg-green-200 rounded-full px-3 inline-block">
+            Technology
+          </div>
+          <div class="text-violet-600 bg-violet-200 rounded-full px-3 inline-block">
+            Innovation
+          </div>
+        </div>
+      </div>
+  
+      <!-- Blog Post 2 -->
+      <div class="bg-white p-5 pb-10 w-full max-w-[352px] mx-auto cursor-pointer">
+        <img class="mb-8" src="./Asset/qr-code-scanning.webp" alt="" />
+        <div class="flex items-center text-gray-600 gap-1">
+          <div class="text-[20px] rounded-full">Kushagra Pandey</div>
+          <div class="text-base decoration-solid">
+            <ul>
+              <li>18 Jan 2025</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="text-lg font-semibold max-w-[260px]">
+          QR-Based Boarding System
+        </div>
+        <div class="text-lg text-gray-600 mb-4">
+          Understanding how QR-based ticketing prevents fraud and speeds up boarding.
+        </div>
+        <div class="mb-4 flex gap-x-2 text-sm">
+          <div class="text-primary bg-blue-200 rounded-full px-3 inline-block">
+            Security
+          </div>
+          <div class="text-green-600 bg-green-200 rounded-full px-3 inline-block">
+            Automation
+          </div>
+        </div>
+      </div>
+  
+      <!-- Blog Post 3 -->
+      <div class="bg-white p-5 pb-10 w-full max-w-[352px] mx-auto cursor-pointer">
+        <img class="mb-8" src="./Asset/secure-online-payment.webp" alt="" />
+        <div class="flex items-center text-gray-600 gap-1">
+          <div class="text-[20px] rounded-full">Abhey Tiwari</div>
+          <div class="text-base decoration-solid">
+            <ul>
+              <li>20 Jan 2025</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="text-lg font-semibold max-w-[260px]">
+          Ensuring Secure Online Payments
+        </div>
+        <div class="text-lg text-gray-600 mb-4">
+          A look at how secure payment gateways enhance customer trust in digital booking.
+        </div>
+        <div class="mb-4 flex gap-x-2 text-sm">
+          <div class="text-yellow-500 bg-yellow-200 rounded-full px-3 inline-block">
+            Payments
+          </div>
+          <div class="text-primary bg-blue-200 rounded-full px-3 inline-block">
+            Finance
+          </div>
+        </div>
+      </div>
+  
+      <!-- Blog Post 4 -->
+      <div class="bg-white p-5 pb-10 w-full max-w-[352px] mx-auto cursor-pointer">
+        <img class="mb-8" src="./Asset/bus-travel-tips.webp" alt="" />
+        <div class="flex items-center text-gray-600 gap-1">
+          <div class="text-[20px] rounded-full">Arjav Jain</div>
+          <div class="text-base decoration-solid">
+            <ul>
+              <li>22 Jan 2025</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="text-lg font-semibold max-w-[260px]">
+          Tips for a Hassle-Free Bus Journey
+        </div>
+        <div class="text-lg text-gray-600 mb-4">
+          Essential tips for a smooth experience with online booking and digital tickets.
+        </div>
+        <div class="mb-4 flex gap-x-2 text-sm">
+          <div class="text-green-600 bg-green-200 rounded-full px-3 inline-block">
+            Travel
+          </div>
+          <div class="text-purple-600 bg-purple-200 rounded-full px-3 inline-block">
+            Comfort
+          </div>
+        </div>
+      </div>
+  
+      <!-- Blog Post 5 -->
+      <div class="bg-white p-5 pb-10 w-full max-w-[352px] mx-auto cursor-pointer">
+        <img class="mb-8" src="./Asset/public-transport-future.webp" alt="" />
+        <div class="flex items-center text-gray-600 gap-1">
+          <div class="text-[20px] rounded-full">Kushagra Pandey</div>
+          <div class="text-base decoration-solid">
+            <ul>
+              <li>25 Jan 2025</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="text-lg font-semibold max-w-[260px]">
+          The Future of Public Transport
+        </div>
+        <div class="text-lg text-gray-600 mb-4">
+          How AI and digital innovations will shape the future of public transportation.
+        </div>
+        <div class="mb-4 flex gap-x-2 text-sm">
+          <div class="text-green-600 bg-green-200 rounded-full px-3 inline-block">
+            AI
+          </div>
+          <div class="text-primary bg-blue-200 rounded-full px-3 inline-block">
+            Public Transport
+          </div>
+          <div class="text-violet-600 bg-violet-200 rounded-full px-3 inline-block">
+            Innovation
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <a
+      class="flex items-center justify-center text-primary font-semibold px-4 py-2 ml-4 transition"
+      href="/"
+    >
+      Show more blogs
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="currentColor"
+        class="ml-2 text-primary"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M11.3 7.7a.5.5 0 0 1 0 .7L8.707 11l2.5 2.5a.5.5 0 0 1-.707.707l-3-3a.5.5 0 0 1 0-.707l3-3a.5.5 0 0 1 .707 0z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M8 12a.5.5 0 0 1-.5-.5V4.707L4.707 6.207a.5.5 0 0 1-.707-.707l3-3a.5.5 0 0 1 .707 0l3 3a.5.5 0 0 1-.707.707L8.5 4.707V11.5a.5.5 0 0 1-.5.5z"
+        />
+      </svg>
+    </a>
+  </div>
+  
+  <div style="background: linear-gradient(96.22deg, #FFA229 9%, #1C4670 59.37%);" class="text-center mb-12">
+    <!-- Heading Section -->
+    <div class="text-white font-bold text-4xl pt-8 py-2">
+      Find the Nearest Bus Stop
+    </div>
+    <div class="text-white text-sm pt-3 pb-8 uppercase tracking-widest">
+      Enter your current location to find the nearest bus stop and get directions to it!
+    </div>
+  
+    <!-- Input and Submit Button -->
+    <div class="mb-8 mx-3">
+      <div class="flex justify-center">
+        <div class="flex w-full sm:w-1/2 lg:w-1/3">
+          <input
+            type="text"
+            placeholder="Enter Your Exact Location"
+            class="rounded-l-sm px-4 py-2 w-full border shadow-lg focus:outline-none"
+          />
+          <button class="bg-yellow-500 rounded-r-sm px-4 py-2 border shadow-lg">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Features with Checkmarks -->
+    <div class="flex flex-col sm:flex-row justify-center items-center w-full space-y-4 sm:space-y-0 sm:space-x-8">
+      <!-- Feature 1 -->
+      <div class="flex items-center justify-center">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mr-2">
+          <!-- Checkmark SVG Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+            <path d="M12.97 3.03a1 1 0 0 1 0 1.41L7.71 9.71a1 1 0 0 1-1.42 0L3.03 6.03a1 1 0 1 1 1.42-1.42L7 7.59l5.55-5.56a1 1 0 0 1 1.42 0z"/>
+          </svg>
+        </div>
+        <h2 class="text-sm text-white font-semibold">
+          Instantly Find the Nearest Bus Stop to You
+        </h2>
+      </div>
+  
+      <!-- Feature 2 -->
+      <div class="flex items-center justify-center">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mr-2">
+          <!-- Checkmark SVG Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+            <path d="M12.97 3.03a1 1 0 0 1 0 1.41L7.71 9.71a1 1 0 0 1-1.42 0L3.03 6.03a1 1 0 1 1 1.42-1.42L7 7.59l5.55-5.56a1 1 0 0 1 1.42 0z"/>
+          </svg>
+        </div>
+        <h2 class="text-sm text-white font-semibold">
+          Seamless Access to Nearby Bus Stops
+        </h2>
+      </div>
+  
+      <!-- Feature 3 -->
+      <div class="flex items-center justify-center">
+        <div class="rounded-full p-3 flex items-center justify-center text-white mr-2">
+          <!-- Checkmark SVG Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+            <path d="M12.97 3.03a1 1 0 0 1 0 1.41L7.71 9.71a1 1 0 0 1-1.42 0L3.03 6.03a1 1 0 1 1 1.42-1.42L7 7.59l5.55-5.56a1 1 0 0 1 1.42 0z"/>
+          </svg>
+        </div>
+        <h2 class="text-sm text-white font-semibold">
+          Your Personalized Bus Stop Search
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div class="bg-primary py-16">
+  <div class="container mx-auto text-center">
+    <!-- Heading and Navigation -->
+    <div class="flex justify-between mb-12">
+      <h2 class="text-4xl font-bold text-white text-left">
+        What people say about us
+      </h2>
+      <div class="flex space-x-2 mt-4">
+        <button class="bg-secondary text-white p-2 rounded-full" id="prevBtn">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" 
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button class="bg-secondary text-white p-2 rounded-full" id="nextBtn">
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" 
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Slider / Carousel Container with hidden scrollbar -->
+    <div class="flex space-x-4 overflow-x-auto p-4 hide-scrollbar">
+      <!-- Customer 1: John Doe -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          I had a great experience booking my bus tickets through this platform.
+          The process was smooth, and I got my tickets instantly. Highly recommended!
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="John Doe" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">John Doe</h6>
+            <p class="text-sm text-gray-500">Excellent Service!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer 2: Jane Smith -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          The website is very easy to navigate, and I found the best deals for my trip.
+          The customer support was also very helpful when I had a query.
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="Jane Smith" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">Jane Smith</h6>
+            <p class="text-sm text-gray-500">Very User-Friendly</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer 3: Alice Johnson -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          I travel frequently, and this platform has never let me down. The buses are always on time,
+          and the booking process is hassle-free.
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="Alice Johnson" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">Alice Johnson</h6>
+            <p class="text-sm text-gray-500">Reliable and Efficient</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer 4: Bob Brown -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          I saved a lot of money using the discounts and offers available on this platform.
+          The payment process was also very secure.
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="Bob Brown" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">Bob Brown</h6>
+            <p class="text-sm text-gray-500">Great Discounts</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer 5: Charlie Davis -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          I was able to book my bus tickets within minutes. The interface is intuitive,
+          and I received my e-ticket immediately.
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="Charlie Davis" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">Charlie Davis</h6>
+            <p class="text-sm text-gray-500">Smooth Booking Experience</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer 6: Eve Wilson -->
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm min-w-[250px] h-[350px] flex-shrink-0">
+        <div class="mb-4">
+          <svg class="w-8 h-8 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+              <g id="right_x5F_quote">
+                <g>
+                  <path style="fill:#1C4670;" d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"/>
+                  <path style="fill:#1C4670;" d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"/>
+                </g>
+              </g>
+            </g>
+            </svg>
+          
+        </div>
+        <p class="text-gray-700">
+          The platform offers a wide range of bus options, and I could easily compare prices
+          and timings. My journey was comfortable and stress-free.
+        </p>
+        <div class="flex items-center mt-5">
+          <img src="./Asset/577fecc62a4c5235cee2977557cb6590.jpg" alt="Eve Wilson" 
+               class="w-16 h-16 rounded-full" />
+          <div class="ml-4 text-left">
+            <h6 class="text-lg font-semibold">Eve Wilson</h6>
+            <p class="text-sm text-gray-500">Highly Satisfied</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="flex flex-col items-center w-full p-8 bg-gray-100">
+    <div class="text-secondary text-sm pt-8 uppercase tracking-widest text-center mb-2">
+      faq
+    </div>
+    <h2 class="text-3xl font-bold mb-8 text-center text-amber-950">
+      Frequently Asked Questions
+    </h2>
+    <div class="w-full max-w-8xl">
+      <div class="border-b border-gray-200 py-4 shadow-1 mb-4 pl-6 pr-6">
+        <button class="w-full text-left flex justify-between items-center focus:outline-none" onclick="toggle(0)">
+          <span class="font-semibold text-lg">How long does it take to get a refund?</span>
+          <span id="icon-0">+</span>
+        </button>
+        <p id="answer-0" class="mt-2 text-gray-600 hidden">Refunds are usually processed within 3–7 working days, depending on the payment method used.</p>
+      </div>
+      <div class="border-b border-gray-200 py-4 shadow-1 mb-4 pl-6 pr-6">
+        <button class="w-full text-left flex justify-between items-center focus:outline-none" onclick="toggle(1)">
+          <span class="font-semibold text-lg">What if my QR code doesn’t work at the bus gate?</span>
+          <span id="icon-1">+</span>
+        </button>
+        <p id="answer-1" class="mt-2 text-gray-600 hidden">Contact the helpline or show your booking details to the bus conductor for manual verification.</p>
+      </div>
+      <div class="border-b border-gray-200 py-4 shadow-1 mb-4 pl-6 pr-6">
+        <button class="w-full text-left flex justify-between items-center focus:outline-none" onclick="toggle(2)">
+          <span class="font-semibold text-lg">What should I do if I lose my phone or QR code?</span>
+          <span id="icon-2">+</span>
+        </button>
+        <p id="answer-2" class="mt-2 text-gray-600 hidden">You can log in from another device and access your ticket under My Bookings.</p>
+      </div>
+      <div class="border-b border-gray-200 py-4 shadow-1 mb-4 pl-6 pr-6">
+        <button class="w-full text-left flex justify-between items-center focus:outline-none" onclick="toggle(3)">
+          <span class="font-semibold text-lg">How can I contact customer support</span>
+          <span id="icon-3">+</span>
+        </button>
+        <p id="answer-3" class="mt-2 text-gray-600 hidden">You can reach us via email, phone, or the live chat option available on the website.</p>
+      </div>
+    </div>
+    <a class="flex items-center justify-center text-primary font-semibold px-4 py-2 ml-4 transition" href="/">
+      Show more
+      <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 text-primary size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+  
+  <footer class="bg-blue-950 text-white py-10">
+    <div class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-4">
+      <div class="pl-6">
+        Design outstanding interfaces <br />
+        with advanced Figma features in <br />a matter of minutes.
+        <div class="flex flex-row pt-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-5 size-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.6 8.6c-.7 0-1.3.3-1.7.7l-1.3 1.3-2.7-2.6 1.5-1.6c.4-.5.3-1.2-.2-1.6-.6-.5-1.3-.4-1.7.1l-2.7 2.7-1.5-1.4c-.4-.3-.9-.3-1.3 0l-1.4 1.4c-.4.3-.4.9 0 1.3.3.4.9.4 1.3 0l1.4-1.4 2.7 2.6-1.5 1.5c-.6.5-.7 1.3-.3 1.9.6.8 1.7 1 2.5.5l1.5-1.5c.2.1.5.1.7.1 1.2 0 2.2-.9 2.3-2.1.1-.9-.4-1.7-1.1-2.1-.5-.2-.9-.3-1.4-.2z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-5 size-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M23 12.27c0-1.23-.19-2.39-.54-3.45h-5.91v6.57h3.23c-.14.74-.54 1.38-1.04 1.85v1.54h1.68c1-.95 1.57-2.37 1.57-3.51zM12 15.6c-.88 0-1.7-.3-2.35-.81l-1.24.95v-2.03h-1.72v-1.5h1.72v-1.23c0-2.2 1.3-3.43 3.34-3.43.97 0 1.8.07 2.04.1v1.72h-1.42c-1.11 0-1.44.53-1.44 1.36v1.42h2.85l-.46 1.5h-2.4v5.19c-.7.48-1.56.77-2.49.77z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-5 size-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.74 3.53C10.09 3.36 10.5 3.35 10.83 3.48 11.18 3.62 11.44 3.89 11.55 4.2L12 5.67L12.45 4.2C12.56 3.89 12.82 3.62 13.17 3.48 13.5 3.35 13.91 3.36 14.26 3.53C14.59 3.68 14.83 4.04 14.95 4.38C15.07 4.72 15.06 5.09 14.91 5.42C14.76 5.76 14.49 6 14.16 6.06C13.83 6.13 13.5 5.93 13.34 5.6L13.03 4.87L12.73 5.6C12.57 5.93 12.24 6.13 11.91 6.06C11.58 6 11.31 5.76 11.16 5.42C11.01 5.09 11 4.72 11.12 4.38C11.24 4.04 11.48 3.68 11.81 3.53C12.16 3.36 12.57 3.35 12.9 3.48C13.23 3.62 13.49 3.89 13.6 4.2L14 5.67L14.4 4.2C14.51 3.89 14.77 3.62 15.1 3.48C15.43 3.35 15.84 3.36 16.17 3.53C16.5 3.68 16.74 4.04 16.86 4.38C16.98 4.72 16.97 5.09 16.82 5.42C16.67 5.76 16.4 6 16.07 6.06C15.74 6.13 15.41 5.93 15.25 5.6L14.94 4.87L14.64 5.6C14.48 5.93 14.15 6.13 13.82 6.06C13.49 6 13.22 5.76 13.07 5.42C12.92 5.09 12.91 4.72 13.03 4.38C13.15 4.04 13.39 3.68 13.72 3.53C14.05 3.36 14.46 3.35 14.79 3.48C15.12 3.62 15.38 3.89 15.49 4.2" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-5 size-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.6 8.6c-.7 0-1.3.3-1.7.7l-1.3 1.3-2.7-2.6 1.5-1.6c.4-.5.3-1.2-.2-1.6-.6-.5-1.3-.4-1.7.1l-2.7 2.7-1.5-1.4c-.4-.3-.9-.3-1.3 0l-1.4 1.4c-.4.3-.4.9 0 1.3.3.4.9.4 1.3 0l1.4-1.4 2.7 2.6-1.5 1.5c-.6.5-.7 1.3-.3 1.9.6.8 1.7 1 2.5.5l1.5-1.5c.2.1.5.1.7.1 1.2 0 2.2-.9 2.3-2.1.1-.9-.4-1.7-1.1-2.1-.5-.2-.9-.3-1.4-.2z" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl text-secondary font-semibold mb-4">Start a Business</h3>
+        <ul>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">About Us</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Careers</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Press</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Blog</button>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-secondary font-semibold mb-4">Government Registration</h3>
+        <ul>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Pricing</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Features</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Integrations</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Security</button>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-secondary font-semibold mb-4">Compliance & Tax</h3>
+        <ul>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Help Center</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Contact Support</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Community</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">API Docs</button>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl text-secondary font-semibold mb-4">BIS & CDSCO</h3>
+        <ul>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Privacy Policy</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Terms of Service</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Cookies</button>
+          </li>
+          <li class="mb-2">
+            <button class="text-white hover:text-gray-400 transition duration-300">Security</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-center w-full p-4 pt-16 bg-white-100">
+      <div class="text-center md:w-1/2">
+        <button class="text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+        <p class="mt-2 text-gray-400 tracking-widest">
+          © 2025 Smart & Move. All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+        });
+        document.getElementById('close-menu').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+        const statesOfIndia = [
+            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
+            "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", 
+            "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", 
+            "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi", "Puducherry"
+        ];
+        const fromSelect = document.getElementById('from');
+        const toSelect = document.getElementById('to');
+        statesOfIndia.forEach(state => {
+            let optionFrom = document.createElement('option');
+            optionFrom.value = state;
+            optionFrom.textContent = state;
+            fromSelect.appendChild(optionFrom);
+            let optionTo = document.createElement('option');
+            optionTo.value = state;
+            optionTo.textContent = state;
+            toSelect.appendChild(optionTo);
+        });
+
+
+        function toggle(index) {
+      const answer = document.getElementById(`answer-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+  
+      if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        icon.textContent = '-';
+      } else {
+        answer.classList.add('hidden');
+        icon.textContent = '+';
+      }
+    }
+
+    document.getElementById("thumbnail").addEventListener("click", function() {
+        document.getElementById("video-container").classList.remove("hidden");
+        this.parentElement.classList.add("hidden");
+      });
+    
+      document.getElementById("play-button").addEventListener("click", function() {
+        document.getElementById("video-container").classList.remove("hidden");
+        this.parentElement.classList.add("hidden");
+      });
+    </script>
+</body>
+</html>
