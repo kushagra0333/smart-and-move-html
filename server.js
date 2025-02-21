@@ -5,7 +5,7 @@ const app = express();
 
 // ✅ Allow CORS from your new frontend URL
 app.use(cors({
-    origin: "https://kushagra0333.github.io/smart-and-move-html/",
+    origin: "https://kushagra0333.github.io/",
     methods: ["GET"]
 }));
 
