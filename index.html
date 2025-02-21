@@ -10,6 +10,9 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         /* Custom colors can be defined if not already in your Tailwind config */
+        .hero-header{
+          background-image: url(./Asset/bus-bg.png);
+        }
         .bg-primary { background-color:#1C4670; } /* Example dark blue/gray */
         .bg-secondary { background-color:#FFA229 ; } /* Example gray */
         .text-secondary{color: #FFA229;}
@@ -21,8 +24,7 @@
 </head>
 <body>
     <div
-  class="bg-cover bg-center text-white"
-  style="background-image: url('./Asset/bus-bg.png');">
+  class="hero-header bg-cover bg-center text-white">
     <header class="flex justify-between items-center p-4 bg-black bg-opacity-30 relative">
         <div class="flex items-center gap-10">
             <div class="text-2xl font-bold">Smart & Move</div>
