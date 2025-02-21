@@ -4,10 +4,7 @@ const cors = require("cors");
 const app = express();
 
 // ✅ Allow CORS from your frontend URL
-app.use(cors({
-    origin: "http://127.0.0.1:5500",
-    methods: ["GET"]
-}));
+app.use(cors({ origin: "https://kushagra0333.github.io" }));
 
 // List of Indian states
 const statesOfIndia = [
@@ -59,5 +56,6 @@ app.get("/api/buses", (req, res) => {
 });
 
 // Start the server
-const PORT = 3000;
+const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
