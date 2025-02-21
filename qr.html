@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bus Ticket QR Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #qrcode-container {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body onload="generateQR()">
+    <h2>Your Ticket QR Code</h2>
+    <p id="ticket-info"></p>
+    <div id="qrcode-container"></div>
+    <a id="download-btn" class="btn" onclick="downloadQR()">Download QR Code</a>
+
+    <script>
+        function generateQR() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bus = urlParams.get("bus") || "Unknown Bus";
+            const amount = urlParams.get("amount") || "Unknown Amount";
+            const qrData = `Ticket for: ${bus}\nAmount Paid: ₹${amount}`;
+
+            document.getElementById("ticket-info").innerText = `Bus: ${bus} | Amount Paid: ₹${amount}`;
+
+            // Generate QR Code
+            const qr = qrcode(0, 'L');
+            qr.addData(qrData);
+            qr.make();
+
+            // Display QR Code as an image
+            const qrContainer = document.getElementById("qrcode-container");
+            qrContainer.innerHTML = qr.createImgTag(5);  // Scale factor 5 for better quality
+
+            // Enable download button
+            setTimeout(() => {
+                const qrImg = qrContainer.querySelector("img");
+                if (qrImg) {
+                    document.getElementById("download-btn").href = qrImg.src;
+                    document.getElementById("download-btn").download = "BusTicketQRCode.png";
+                }
+            }, 500);
+        }
+
+        function downloadQR() {
+            const qrImg = document.querySelector("#qrcode-container img");
+            if (!qrImg) {
+                alert("QR Code is not generated yet!");
+                return;
+            }
+            const link = document.createElement("a");
+            link.href = qrImg.src;
+            link.download = "BusTicketQRCode.png";
+            link.click();
+        }
+    </script>
+</body>
+</html>

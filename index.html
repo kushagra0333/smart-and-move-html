@@ -54,6 +54,7 @@
         <button class="border border-white px-4 py-2 text-white rounded-md">Log In</button>
         <button class="bg-white text-black px-4 py-2 rounded-md">Sign Up</button>
     </nav>
+
     <section class="text-center py-20 px-5 mt-[100px]">
         <div class="bg-black bg-opacity-40 p-4 px-0 rounded-lg mb-6">
             <h1 class="text-5xl font-bold mb-10">Navigate Roads with Comfort</h1>
@@ -71,19 +72,19 @@
                 </div>
                 <div class="w-full">
                     <label class="block mb-1">Passengers</label>
-                    <input id="passenger-count" type="number" placeholder="1" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full">
+                    <input id="passenger-count" type="number" placeholder="1" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full" min="1">
                 </div>
                 <div class="w-full">
                     <label class="block mb-1">Departure</label>
-                    <input type="date" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full">
+                    <input id="date" type="date" class="px-5 py-3 rounded-md border border-gray-300 text-black w-full">
                 </div>
                 <div class="flex items-end w-full">
-                    <button class="bg-black text-white font-bold px-6 py-3 rounded-md w-full">Search</button>
+                    <button id="search-btn" class="bg-primary hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-md w-full">Search</button>
                 </div>
             </div>
         </div>
     </section>
-    
+
     </div>
     <div class="flex flex-col items-center text-center pt-14 px-4">
         <div class=" text-sm uppercase tracking-widest text-secondary">
@@ -903,37 +904,34 @@
   </footer>
   
     <script>
-        document.getElementById('passenger-count').addEventListener('input', function() {
-        if (this.value < 0) {
-            this.value = 0;
-        }
-    }); 
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.remove('hidden');
-        });
-        document.getElementById('close-menu').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.add('hidden');
-        });
-        const statesOfIndia = [
-            "Select State","Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
-            "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", 
-            "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", 
-            "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi", "Puducherry"
+           const statesOfIndia = [
+            "Select State", "Andhra Pradesh", "Assam", "Bihar", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", 
+            "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan", "Tamil Nadu", "Uttar Pradesh", "West Bengal"
         ];
         const fromSelect = document.getElementById('from');
         const toSelect = document.getElementById('to');
         statesOfIndia.forEach(state => {
-            let optionFrom = document.createElement('option');
-            optionFrom.value = state;
-            optionFrom.textContent = state;
-            fromSelect.appendChild(optionFrom);
-            let optionTo = document.createElement('option');
-            optionTo.value = state;
-            optionTo.textContent = state;
-            toSelect.appendChild(optionTo);
+            let option = `<option value="${state}">${state}</option>`;
+            fromSelect.innerHTML += option;
+            toSelect.innerHTML += option;
         });
 
+        document.getElementById('search-btn').addEventListener('click', () => {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const passengers = document.getElementById('passenger-count').value;
+            const date = document.getElementById('date').value;
 
+            if (from === "Select State" || to === "Select State" || !date || passengers <= 0) {
+                alert("Please enter valid details!");
+                return;
+            }
+
+            window.location.href = `buses.html?from=${from}&to=${to}&passengers=${passengers}&date=${date}`;
+        });
+    
+
+        
         function toggle(index) {
       const answer = document.getElementById(`answer-${index}`);
       const icon = document.getElementById(`icon-${index}`);

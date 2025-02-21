@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Buses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto py-10 px-5">
+        <h1 class="text-4xl font-bold mb-6 text-center">Available Buses</h1>
+        <div id="bus-list" class="space-y-6"></div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const from = params.get("from");
+        const to = params.get("to");
+        const passengers = params.get("passengers");
+        const date = params.get("date");
+
+        async function fetchBuses() {
+            const response = await fetch(`http://127.0.0.1:3000/api/buses?from=${from}&to=${to}&date=${date}`);
+            const buses = await response.json();
+            const busList = document.getElementById("bus-list");
+
+            if (buses.length === 0) {
+                busList.innerHTML = `<p class="text-center text-red-500">No buses available for this route.</p>`;
+                return;
+            }
+
+            buses.forEach(bus => {
+                const totalPrice = bus.price * passengers;
+
+                busList.innerHTML += `
+                    <div class="bg-black p-5 rounded-lg shadow-lg flex flex-col sm:flex-row justify-between items-center">
+                        <div>
+                            <h2 class="text-2xl font-bold">${bus.name}</h2>
+                            <p class="text-gray-300">Departure: ${bus.time}</p>
+                            <p class="text-gray-300">Seats Available: ${bus.seats}</p>
+                            <p class="text-green-400 font-bold">Price: ₹${bus.price} per seat</p>
+                        </div>
+                        <div>
+                            <p class="text-yellow-400 font-bold text-lg mb-2">Total: ₹${totalPrice}</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-md mt-3"
+                                onclick="redirectToPayment('${bus.name}', '${totalPrice}')">Buy Now</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function redirectToPayment(busName, total) {
+            window.location.href = `payment.html?bus=${busName}&amount=${total}`;
+        }
+
+        fetchBuses();
+    </script>
+</body>
+</html>
