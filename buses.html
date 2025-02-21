@@ -20,7 +20,7 @@
         const date = params.get("date");
 
         async function fetchBuses() {
-            const response = await fetch(`https://kushagra0333.github.io/smart-and-move-html/api/buses?from=${from}&to=${to}&date=${date}`);
+            const response = await fetch(`https://kushagra0333.github.io/smart-and-move-html/buses?from=${from}&to=${to}&date=${date}`);
 
             const buses = await response.json();
             const busList = document.getElementById("bus-list");
@@ -51,7 +51,7 @@
         }
 
         function redirectToPayment(busName, total) {
-            window.location.href = `payment.html?bus=${busName}&amount=${total}`;
+            window.location.href = `payment?bus=${busName}&amount=${total}`;
         }
 
         fetchBuses();
