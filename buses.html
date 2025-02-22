@@ -6,9 +6,9 @@
     <title>Available Buses</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white">
-    <div class="max-w-4xl mx-auto py-10 px-5">
-        <h1 class="text-4xl font-bold mb-6 text-center">Available Buses</h1>
+<body class="bg-white text-gray-900 min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full bg-gray-100 p-8 rounded-xl shadow-lg">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Available Buses</h1>
         <div id="bus-list" class="space-y-6"></div>
     </div>
 
@@ -21,8 +21,7 @@
 
         async function fetchBuses() {
             try {
-                const response = await fetch(`https://smart-and-move-html.vercel.app/api/buses?from=${from}&to=${to}&date=${date}`);
-                
+                const response = await fetch(`http://127.0.0.1:3000/api/buses?from=${from}&to=${to}&date=${date}`);
                 if (!response.ok) {
                     throw new Error("No buses available.");
                 }
@@ -37,21 +36,23 @@
 
                 buses.forEach(bus => {
                     const totalPrice = bus.price * passengers;
-
-                    busList.innerHTML += `
-                        <div class="bg-black p-5 rounded-lg shadow-lg flex flex-col sm:flex-row justify-between items-center">
-                            <div>
-                                <h2 class="text-2xl font-bold">${bus.name}</h2>
-                                <p class="text-gray-300">Departure: ${bus.time}</p>
-                                <p class="text-gray-300">Seats Available: ${bus.seats}</p>
-                                <p class="text-green-400 font-bold">Price: ₹${bus.price} per seat</p>
-                            </div>
-                            <div>
-                                <p class="text-yellow-400 font-bold text-lg mb-2">Total: ₹${totalPrice}</p>
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-md mt-3"
-                                    onclick="redirectToPayment('${bus.name}', '${totalPrice}')">Buy Now</button>
-                            </div>
+                    
+                    const busCard = document.createElement("div");
+                    busCard.className = "bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-center border border-gray-300 transform transition duration-300 hover:scale-105 hover:shadow-xl";
+                    busCard.innerHTML = `
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800">${bus.name}</h2>
+                            <p class="text-gray-600">Departure: ${bus.time}</p>
+                            <p class="text-gray-600">Seats Available: ${bus.seats}</p>
+                            <p class="text-green-600 font-medium">Price: ₹${bus.price} per seat</p>
+                        </div>
+                        <div class="text-center sm:text-right">
+                            <p class="text-yellow-600 font-semibold text-lg mb-3">Total: ₹${totalPrice}</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md transition duration-300 shadow-md"
+                                onclick="redirectToPayment('${bus.name}', '${totalPrice}')">Buy Now</button>
                         </div>`;
+                    
+                    busList.appendChild(busCard);
                 });
             } catch (error) {
                 document.getElementById("bus-list").innerHTML = `<p class="text-center text-red-500">${error.message}</p>`;

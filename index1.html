@@ -25,37 +25,53 @@
 <body>
     <div
   class="hero-header bg-cover bg-center text-white">
-    <header class="flex justify-between items-center p-4 bg-black bg-opacity-30 relative">
-        <div class="flex items-center gap-10">
-            <div class="text-2xl font-bold">Smart & Move</div>
-            <nav class="hidden lg:flex">
-                <ul class="flex gap-6 text-lg">
-                    <li class="cursor-pointer">Nearest Bus Stop</li>
-                    <li class="cursor-pointer">Real Time Tracking</li>
-                    <li class="cursor-pointer">Blog</li>
-                    <li class="cursor-pointer">Feedback</li>
-                    <li class="cursor-pointer">Contact Us</li>
-                </ul>
-            </nav>
+  <header class="flex justify-between items-center p-4 bg-black bg-opacity-30 relative">
+    <div class="flex items-center gap-10">
+        <div class="text-2xl font-bold">Smart & Move</div>
+        <nav class="hidden lg:flex">
+            <ul class="flex gap-6 text-lg">
+                <li class="cursor-pointer">Nearest Bus Stop</li>
+                <li class="cursor-pointer">Real Time Tracking</li>
+                <li class="cursor-pointer">Blog</li>
+                <li class="cursor-pointer">Feedback</li>
+                <li class="cursor-pointer">Contact Us</li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="relative hidden lg:flex items-center gap-4">
+        <div class="relative">
+            <div class="flex items-center gap-2 bg-white p-1 rounded-full cursor-pointer" id="profile-btn">
+                <img src="./Asset//577fecc62a4c5235cee2977557cb6590.jpg" alt="Profile" class="w-10 h-10 rounded-full border-2 border-white">
+                <div class="w-6 h-6 bg-white flex items-center justify-center rounded-full">
+                    <span class="text-black">▼</span>
+                </div>
+            </div>
+            <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Profile</a>
+                <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Bus History</a>
+                <a href="#" class="block px-4 py-2 text-red-500 hover:bg-gray-200">Logout</a>
+            </div>
         </div>
-        <div class="lg:hidden">
-            <button id="menu-toggle" class="text-white text-2xl">☰</button>
-        </div>
-        <div class="hidden lg:flex gap-3">
-          <button class="border border-white px-4 py-2 text-white rounded-md" onclick="window.location.href='./login.html'">Log In</button>
-          <button class="bg-white text-black px-4 py-2 rounded-md" onclick="window.location.href='./signup.html'">Sign Up</button>          
-        </div>
-    </header>
-    <nav id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-xl">
-        <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
-        <a href="#" class="text-white">Nearest Bus Stop</a>
-        <a href="#" class="text-white">Real Time Tracking</a>
-        <a href="#" class="text-white">Blog</a>
-        <a href="#" class="text-white">Feedback</a>
-        <a href="#" class="text-white">Contact Us</a>
-        <button class="border border-white px-4 py-2 text-white rounded-md">Log In</button>
-        <button class="bg-white text-black px-4 py-2 rounded-md">Sign Up</button>
-    </nav>
+    </div>
+    
+    <div class="lg:hidden">
+        <button id="menu-toggle" class="text-white text-2xl">☰</button>
+    </div>
+</header>
+
+<nav id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-xl">
+    <button id="close-menu" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+    <a href="#" class="text-white">Nearest Bus Stop</a>
+    <a href="#" class="text-white">Real Time Tracking</a>
+    <a href="#" class="text-white">Blog</a>
+    <a href="#" class="text-white">Feedback</a>
+    <a href="#" class="text-white">Contact Us</a>
+    <a href="#" class="text-white">Profile</a>
+    <a href="#" class="text-white">Bus History</a>
+    <a href="#" class="text-red-500">Logout</a>
+</nav>
+
 
     <section class="text-center py-20 px-5 mt-[100px]">
         <div class="bg-black bg-opacity-40 p-4 px-0 rounded-lg mb-6">
@@ -906,13 +922,29 @@
   </footer>
   
     <script>
-      document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.remove('hidden');
-        });
-        document.getElementById('close-menu').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.add('hidden');
-        });
-        
+     
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.remove('hidden');
+});
+document.getElementById('close-menu').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.add('hidden');
+});
+
+document.getElementById('profile-btn').addEventListener('click', function() {
+    document.getElementById('profile-menu').classList.toggle('hidden');
+});
+
+document.addEventListener('click', function(event) {
+    const profileMenu = document.getElementById('profile-menu');
+    const profileBtn = document.getElementById('profile-btn');
+    if (!profileBtn.contains(event.target) && !profileMenu.contains(event.target)) {
+        profileMenu.classList.add('hidden');
+    }
+});
+
+
+
+
            const statesOfIndia = [
             "Select State", "Andhra Pradesh", "Assam", "Bihar", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", 
             "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan", "Tamil Nadu", "Uttar Pradesh", "West Bengal"

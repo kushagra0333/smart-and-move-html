@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart & Move</title>
+    <link rel="icon" href="./Asset//main-logo.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        .form-signup {
+            width: 35%;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+        }
+        .eye-btn {
+            border: 0;
+            background: transparent;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+        }
+        .login-signup {
+            position: absolute;
+            right: 15px;
+            top: 5px;
+        }
+        .signup-Button {
+            font-weight: 600;
+        }
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .text-danger {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar bg-white p-3">
+        <div class="container-fluid">
+            <span class="login-signup">If you have an account, <a href="/login.html" class="signup-Button text-primary">Log in</a></span>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="form-signup">
+            <form id="signupForm">
+                <img class="mb-4" src="./Asset/logo.png" alt="Logo" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                    <label for="firstName">First Name</label>
+                    <div class="text-danger" id="firstNameError"></div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                    <label for="lastName">Last Name</label>
+                    <div class="text-danger" id="lastNameError"></div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    <label for="email">Email address</label>
+                    <div class="text-danger" id="emailError"></div>
+                </div>
+                
+                <div class="form-floating position-relative mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <label for="password">Password</label>
+                    <button class="eye-btn" type="button" onclick="togglePassword()">
+                        <i id="eyeIcon" class="fas fa-eye"></i>
+                    </button>
+                    <div class="text-danger" id="passwordError"></div>
+                </div>
+                
+                <div class="form-floating position-relative mb-3">
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <button class="eye-btn" type="button" onclick="toggleConfirmPassword()">
+                        <i id="eyeIconConfirm" class="fas fa-eye"></i>
+                    </button>
+                    <div class="text-danger" id="confirmPasswordError"></div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 mb-3 py-2">Sign Up</button>
+                <button class="google-btn btn btn-outline-danger w-100 mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                      <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+                    </svg>
+                      Sign Up with Google
+                  </button>
+                  
+                  <p class="mt-5 mb-3 text-body-secondary">&copy; Smart And Moce, Inc. 2025</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("eyeIcon");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+        function toggleConfirmPassword() {
+            var confirmPasswordField = document.getElementById("confirmPassword");
+            var eyeIconConfirm = document.getElementById("eyeIconConfirm");
+            if (confirmPasswordField.type === "password") {
+                confirmPasswordField.type = "text";
+                eyeIconConfirm.classList.remove("fa-eye");
+                eyeIconConfirm.classList.add("fa-eye-slash");
+            } else {
+                confirmPasswordField.type = "password";
+                eyeIconConfirm.classList.remove("fa-eye-slash");
+                eyeIconConfirm.classList.add("fa-eye");
+            }
+        }
+
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let valid = true;
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (!firstName) {
+                document.getElementById("firstNameError").innerText = "First name is required";
+                valid = false;
+            } else {
+                document.getElementById("firstNameError").innerText = "";
+            }
+
+            if (!lastName) {
+                document.getElementById("lastNameError").innerText = "Last name is required";
+                valid = false;
+            } else {
+                document.getElementById("lastNameError").innerText = "";
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                document.getElementById("emailError").innerText = "Invalid email";
+                valid = false;
+            } else {
+                document.getElementById("emailError").innerText = "";
+            }
+
+            if (password.length < 6) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters long";
+                valid = false;
+            } else {
+                document.getElementById("passwordError").innerText = "";
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").innerText = "Passwords do not match";
+                valid = false;
+            } else {
+                document.getElementById("confirmPasswordError").innerText = "";
+            }
+
+            if (valid) {
+                window.location.href='login.html';
+            }
+        });
+    </script>
+</body>
+</html>

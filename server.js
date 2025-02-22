@@ -3,12 +3,11 @@ const cors = require("cors");
 
 const app = express();
 
-// ✅ Allow CORS from your new frontend URL
+
 app.use(cors({
-    origin: "https://smart-and-move-html.vercel.app/",
+    origin: "http://127.0.0.1:5500",
     methods: ["GET"]
 }));
-
 // List of Indian states
 const statesOfIndia = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", 
