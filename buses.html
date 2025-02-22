@@ -21,7 +21,7 @@
 
         async function fetchBuses() {
             try {
-                const response = await fetch(`https://kushagra0333.github.io/smart-and-move-html/api/buses?from=${from}&to=${to}&date=${date}`);
+                const response = await fetch(`https://smart-and-move-html.vercel.app/api/buses?from=${from}&to=${to}&date=${date}`);
                 
                 if (!response.ok) {
                     throw new Error("No buses available.");
