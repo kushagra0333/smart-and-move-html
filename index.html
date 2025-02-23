@@ -913,12 +913,14 @@
             document.getElementById('mobile-menu').classList.add('hidden');
         });
         
-           const statesOfIndia = [
+        const statesOfIndia = [
             "Select State", "Andhra Pradesh", "Assam", "Bihar", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", 
             "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan", "Tamil Nadu", "Uttar Pradesh", "West Bengal"
         ];
+
         const fromSelect = document.getElementById('from');
         const toSelect = document.getElementById('to');
+
         statesOfIndia.forEach(state => {
             let option = `<option value="${state}">${state}</option>`;
             fromSelect.innerHTML += option;
@@ -938,7 +940,7 @@
 
             window.location.href = `buses.html?from=${from}&to=${to}&passengers=${passengers}&date=${date}`;
         });
-    
+        
 
         
         function toggle(index) {

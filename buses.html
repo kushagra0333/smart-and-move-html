@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Buses</title>
+    <title>Smart & Move</title>
+    <link rel="icon" href="./Asset//main-logo.jpg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex items-center justify-center">
@@ -13,56 +14,84 @@
     </div>
 
     <script>
+        // List of states in India
+        const statesOfIndia = [
+            "Andhra Pradesh", "Assam", "Bihar", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", 
+            "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan", 
+            "Tamil Nadu", "Uttar Pradesh", "West Bengal"
+        ];
+
+        // Random Bus Generator Function
+        function generateRandomBuses() {
+            let busData = [];
+            statesOfIndia.forEach(fromState => {
+                statesOfIndia.forEach(toState => {
+                    if (fromState !== toState) {
+                        let numBuses = Math.floor(Math.random() * 3) + 1; // Randomly 1 to 3 buses
+                        for (let i = 0; i < numBuses; i++) {
+                            busData.push({
+                                from: fromState,
+                                to: toState,
+                                name: `${fromState} Express Bus ${i + 1}`,
+                                time: `${Math.floor(Math.random() * 12) + 1}:00 ${Math.random() > 0.5 ? "AM" : "PM"}`,
+                                seats: Math.floor(Math.random() * 30) + 10, // Random between 10 and 40 seats
+                                price: Math.floor(Math.random() * 1000) + 500 // Random price between ₹500 to ₹1500
+                            });
+                        }
+                    }
+                });
+            });
+            return busData;
+        }
+
+        // Get query parameters from URL
         const params = new URLSearchParams(window.location.search);
         const from = params.get("from");
         const to = params.get("to");
         const passengers = params.get("passengers");
         const date = params.get("date");
 
-        async function fetchBuses() {
-            try {
-                const response = await fetch(`http://127.0.0.1:3000/api/buses?from=${from}&to=${to}&date=${date}`);
-                if (!response.ok) {
-                    throw new Error("No buses available.");
-                }
+        // Generate random bus data
+        const busData = generateRandomBuses();
 
-                const buses = await response.json();
-                const busList = document.getElementById("bus-list");
+        // Filter buses based on user input
+        function fetchBuses() {
+            const filteredBuses = busData.filter(bus => bus.from === from && bus.to === to);
+            const busList = document.getElementById("bus-list");
 
-                if (buses.length === 0) {
-                    busList.innerHTML = `<p class="text-center text-red-500">No buses available for this route.</p>`;
-                    return;
-                }
-
-                buses.forEach(bus => {
-                    const totalPrice = bus.price * passengers;
-                    
-                    const busCard = document.createElement("div");
-                    busCard.className = "bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-center border border-gray-300 transform transition duration-300 hover:scale-105 hover:shadow-xl";
-                    busCard.innerHTML = `
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-800">${bus.name}</h2>
-                            <p class="text-gray-600">Departure: ${bus.time}</p>
-                            <p class="text-gray-600">Seats Available: ${bus.seats}</p>
-                            <p class="text-green-600 font-medium">Price: ₹${bus.price} per seat</p>
-                        </div>
-                        <div class="text-center sm:text-right">
-                            <p class="text-yellow-600 font-semibold text-lg mb-3">Total: ₹${totalPrice}</p>
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md transition duration-300 shadow-md"
-                                onclick="redirectToPayment('${bus.name}', '${totalPrice}')">Buy Now</button>
-                        </div>`;
-                    
-                    busList.appendChild(busCard);
-                });
-            } catch (error) {
-                document.getElementById("bus-list").innerHTML = `<p class="text-center text-red-500">${error.message}</p>`;
+            if (filteredBuses.length === 0) {
+                busList.innerHTML = `<p class="text-center text-red-500">No buses available for this route.</p>`;
+                return;
             }
+
+            filteredBuses.forEach(bus => {
+                const totalPrice = bus.price * passengers;
+                
+                const busCard = document.createElement("div");
+                busCard.className = "bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-center border border-gray-300 transform transition duration-300 hover:scale-105 hover:shadow-xl";
+                busCard.innerHTML = `
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">${bus.name}</h2>
+                        <p class="text-gray-600">Departure: ${bus.time}</p>
+                        <p class="text-gray-600">Seats Available: ${bus.seats}</p>
+                        <p class="text-green-600 font-medium">Price: ₹${bus.price} per seat</p>
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <p class="text-yellow-600 font-semibold text-lg mb-3">Total: ₹${totalPrice}</p>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md transition duration-300 shadow-md"
+                            onclick="redirectToPayment('${bus.name}', '${totalPrice}')">Buy Now</button>
+                    </div>`;
+
+                busList.appendChild(busCard);
+            });
         }
 
+        // Redirect to the payment page
         function redirectToPayment(busName, total) {
             window.location.href = `payment.html?bus=${busName}&amount=${total}`;
         }
 
+        // Call the function to fetch and display buses
         fetchBuses();
     </script>
 </body>
