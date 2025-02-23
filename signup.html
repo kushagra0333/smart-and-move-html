@@ -41,12 +41,15 @@
         .text-danger {
             font-size: 14px;
         }
+        .pointer{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar bg-white p-3">
         <div class="container-fluid">
-            <span class="login-signup">If you have an account, <a href="/login.html" class="signup-Button text-primary">Log in</a></span>
+            <span class="login-signup">If you have an account, <a onclick="window.location.href = './login.html'" class="signup-Button text-primary pointer">Log in</a></span>
         </div>
     </nav>
 
