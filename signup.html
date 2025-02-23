@@ -28,16 +28,10 @@
         }
         .signup-Button {
             font-weight: 600;
+            border: none;
+            background: none;
         }
-        .google-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+        
         .text-danger {
             font-size: 14px;
         }
@@ -49,7 +43,8 @@
 <body>
     <nav class="navbar bg-white p-3">
         <div class="container-fluid">
-            <span class="login-signup">If you have an account, <a onclick="window.location.href = './login.html'" class="signup-Button text-primary pointer">Log in</a></span>
+            <span class="login-signup">If you have an account,  <button class="signup-Button text-primary pointer" onclick="window.location.href='./login.html'">Log In</button>
+            </span>
         </div>
     </nav>
 
